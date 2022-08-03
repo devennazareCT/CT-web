@@ -4,7 +4,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" async="" src="https://d2r1yp2w7bby2u.cloudfront.net/js/a.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!--<script type="text/javascript">-->
-  
+      
+    <!-- CleverTap Script if not using Google Tag Manager -->
+      <!-- <script type="text/javascript">
+        console.log("GTM WORKING");
+             var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
+         // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+        clevertap.account.push({"id": "654-Z9R-646Z"});
+           clevertap.enablePersonalization = true;
+        clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
+        clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agrees to share their IP data
+         (function () {
+                 var wzrk = document.createElement('script');
+                 wzrk.type = 'text/javascript';
+                 wzrk.async = true;
+                 wzrk.src = 'https://cdn.jsdelivr.net/npm/clevertap-web-sdk/clevertap.min.js';
+                 var s = document.getElementsByTagName('script')[0];
+                 s.parentNode.insertBefore(wzrk, s);
+          })();
+           console.log("Using gtm1");
+     
+        
+        console.log("Using gtm");
+        console.log("homevisited");
+        clevertap.event.push("HomeScreenViewed");
+        clevertap.event.push("GTM Script");
+        clevertap.event.push("Event Browser");
+              if (window.CleverTap) {
+                  CleverTap.pushEvent("Webview Browser"); 
+     
+              }
+          
+      
+     
+        </script> -->
     <title>Clevertap Web SDK</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
