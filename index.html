@@ -1,166 +1,496 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clevertap</title>
-    <!-- Notification Push javascript file -->
-   <!--<script src="/notificationPush.js"></script>-->
-    <script type="text/javascript">
-      var clevertap = {
-        event: [],
-        profile: [],
-        account: [],
-        onUserLogin: [],
-        notifications: [],
-        privacy: [],
-      };
-      // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-      clevertap.account.push({ id: "TEST-654-Z9R-646Z" });
-      //clevertap.privacy.push({ useIP: false }); 
-        
-      clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
-      
-      (function () {
-        var wzrk = document.createElement("script");
-        wzrk.type = "text/javascript";
-        wzrk.async = true;
-       wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
-      // wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
-		
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(wzrk, s);
-      })();
-    </script>
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-         apiKey: "AIzaSyD4fod_6G9JL1ZnnjaaM2PGZcNyME-sDQ0",
-    authDomain: "test-86509.firebaseapp.com",
-    projectId: "test-86509",
-    storageBucket: "test-86509.appspot.com",
-    messagingSenderId: "618828970358",
-    appId: "1:618828970358:web:fba84ed480f1af3136e257",
-    measurementId: "G-KJHHXRZKKX"
-      };
-    
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-     
-    </script>
+<html lang="en"><head>
+   <link rel="manifest" href="/manifest.json">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <script type="text/javascript" async="" src="https://d2r1yp2w7bby2u.cloudfront.net/js/a.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+   <!--<script type="text/javascript">-->
+ 
+   <title>Clevertap Web SDK</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+ <meta name="viewport"
+       content="width=device-width,
+                initial-scale=1">
+ <meta http-equiv="X-UA-Compatible"
+       content="ie=edge">
 
-    <link rel="manifest" href="/manifest.json" />
-  </head>
-  <body>
+ <!-- Title -->
+<style>
+   .wzrk-overlay{display:none};
+</style>
+ <!-- Meta Tags required for
+      Progressive Web App -->
+ <meta name=
+ "apple-mobile-web-app-status-bar"
+       content="#aa7700">
+ <meta name="theme-color"
+       content="black">
+
+ <!-- Manifest File link -->
+ <link rel="manifest"
+       href="manifest.json">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+   
+   <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P5KD2T3');</script>
+<!-- End Google Tag Manager -->
+
+<script>
+           
+</script>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1058.0" data-gr-ext-installed="">
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5KD2T3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+   <div class="jumbotron text-center">
+      <h1>CleverTap Web Integration</h1>
+                   <button type="button" class="btn btn-danger" onclick=window.location.href="./login.html">Logout</button>
+
+   </div>
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-6">
+            <h3>Hello There. </h3> 
+            <button onclick="myFunction1()">Try it</button>
+
+            <p id="demo"></p>
+            
+            <script>
+            function myFunction1() {
+              let text = "Press a button!\nEither OK or Cancel.";
+              if (confirm(text) == true) {
+               clevertap.privacy.push({useIP: true});
+                text = "You pressed OK!";
+              } else {
+               clevertap.privacy.push({useIP: false});
+                text = "You canceled!";
+              }
+              document.getElementById("demo").innerHTML = text;
+            }
+            </script>
+            <p>Welcome To ClevertTap</p>
+            <a href="https://infinitival-floor.000webhostapp.com/screen2.html" target="_self">Visit Screen2!</a>
+<button type="button" class="btn btn-danger" onclick="myFunction('hungama')">Push Event </button>
+ <button type="button" class="btn btn-danger" onclick="websdkevent()">WEB SDK Event</button>
+
+            <!--<button type="button" class="btn btn-danger" onclick="pushProfile()">Push Profile Data </button>-->
+            <a href="taagaa://">Open App</a>
+            <button type="button" class="btn btn-danger" onclick="productView()">View Product </button>
+           
+           
+            <button type="button" class="btn btn-danger" onclick="pushNotification()">Push Notification</button>
+                        <button type="button" class="btn btn-danger" id="shareButton">Share btn</button>
+
+            <p id="demo"></p>
+         </div>
+      </div>
+   </div>
+ <script>
+ if(window.CleverTap){
+shareButton.addEventListener('click', () => {
+   window.AndroidShareHandler.share('https://stackoverflow.com');
+   });
+ alert("Hello dev")
+ }
+    shareButton.addEventListener('click', () => {
+   console.log("clicked")
+   window.AndroidShareHandler.share('https://stackoverflow.com');
+});
+     
+ </script>
+   <script>
+      console.log("outside notification callback");
+      
+       clevertap.notificationCallback = function(msg){
+           console.log("inside notification callback");
+            // raise the notification viewed and clicked events in the callback
+            clevertap.raiseNotificationViewed();
+            console.log("title is"+JSON.stringify(msg.msgContent.title));
+            console.log("DESC is"+JSON.stringify(msg.msgContent.description));
+            
+       }            
+        console.log("MSG"+JSON.stringify(msg.msgContent));
+
+     //       var tit = JSON.stringify(msg.msgContent.title);
+     //       var desc = JSON.stringify(msg.msgContent.description);
+     //       this.showinbox()
+     //       document.getElementById("titlepop").innerHTML = tit.replace(/['"]+/g, '');
+     //       document.getElementById("descriptionpop").innerHTML = desc.replace(/['"]+/g, '');
+      
+          
+     //  }//your custom rendering implementation here
+   </script>
+   <script>
+   console.log("inside click webpopu");
+//       clevertap.notificationCallback = function(msg){
+//       //raise the notification viewed and clicked events in the callback
+//       clevertap.raiseNotificationViewed();
+//      /// console.log(JSON.stringify(msg));            //your custom rendering implementation here
+//       var $button = jQuery("<button></button>");   //element on whose click you want to raise the notification clicked event
+//       $button.click(function(){
+//          clevertap.raiseNotificationClicked();
+//       });
+// };
+   function showinbox() {
+          console.log("working");
+      var x = document.getElementById("webInbox");
+      if (x.style.display === "none") {
+      x.style.display = "block";
+      } else {
+      x.style.display = "none";
+      }
+      }
+   </script>
+   <!--Script for url params-->
+   <script>
+      console.log("hello world");
+         let urlString =window.location.href
+          let paramString = urlString.split('?')[1];
+          let queryString = new URLSearchParams(paramString);
+          for(let pair of queryString.entries()) {
+              console.log("Key is:" + pair[0]);
+              console.log("Value is:" + pair[1]);
+              const udididentity = pair[1];
+              
+          }
+      console.log("udid is"+udididentity);
+      
+   </script>
+   
+   <script>
+       function websdkevent(){
+       clevertap.event.push("WebSDKEvent");
+
+       }
+   </script>
+   <script>
+      function myFunction(eventname) {
+                   clevertap.event.push("multiinstance1");
+
+
+          alert("hey there !")
+          var customerType = clevertap.profile.getAttribute("Name");
+           console.log("my name is"+customerType);
+        document.getElementById("demo").innerHTML = "<b>Web View Event Pushed </b>   ";
+        clevertap.event.push("DevenWebView");
+          window.clevertap.event.push({
+               'event': eventname,
+            })
+   var mobileView = $(window).width() < 786;
+
+   console.log("mobvieww is"+mobileView);
        
-    <h1>Web SDK Integration Test!</h1>
-    <!-- onUserLogin -->
-   
-    <!-- event -->
-    <button id="event" onclick="pushEvent()">Push Event</button> <br><br>
-    <button id="login" onclick="onuserlogin()">OnUserLogin</button><br><br>
-    <button id="ipfalse" onclick="ipfalse()">IP FALSE</button><br><br>
-    <button id="iptrue" onclick="iptrue()">IP TRUE</button><br><br>
-    <button id="login" onclick="profilepush()">ProfilePush</button>
-    <button id="loc" onclick="pushnotif()">Send Notification</button>
-    <script>
-      
-      setTimeout(function() {
-        let confirmAction = confirm("Are you sure to share your location?");
-        if (confirmAction) {
+   if(mobileView){
+       console.log("welcome")
+       
+       clevertap.event.push("EVET")
 
-           clevertap.event.push("useIP pop: true "); 
-           clevertap.privacy.push({ useIP: true }); 
-          console.log("useIP: true ");
-        } else {
-            clevertap.event.push("useIP: pop false "); 
-          console.log("useIP: false ");
+        if (window.CleverTap) {
+           // Call Android interface             
+              window.clevertap.event.push({
+               'event': eventname,
+            })
+              CleverTap.pushEvent(eventname); 
+              
+           }
+       
+   }
+//An example of recording a User Event called Product Viewed with properties, in the Webview JS
+var props = {foo: 'xyz', lang: 'French'};
+
+if (window.CleverTap) {
+// Call Android interface             
+CleverTap.pushEvent("Product Viewed WEBVIEW",JSON.stringify(props));
+         
+}
+
+        if (window.location.href == "https://infinitival-floor.000webhostapp.com/index.html"){
+            clevertap.event.push("showPopup");
+            console.log("success")
+        }else{
+            console.log("failed")
         }
-    //clevertap.event.push("HOME PAGE");
-    }, 3000);
+      }
+   </script>
+   <script>
+       function pushProfile() {
+   //          let urlString1 =window.location.href
+   //       let paramString1 = urlString1.split('?')[1];
+   //       let queryString1 = new URLSearchParams(paramString1);
+   //       for(let pair of queryString1.entries()) {
+   //           console.log("Key is:" + pair[0]);
+   //           console.log("Value is:" + pair[1]);
+            
+              
+          
+   //      document.getElementById("demo").innerHTML = "<b>Profile Data Pushed </b>   ";
+      
+   //   }
+   //   clevertap.onUserLogin.push({
+   //   "Site": {
+   //   "Name": "Deven Nazare",            // String
+   //   "Identity": "nahidohi123",              // String or number
+   //   "Email": "brazil@gmail.com",         // Email address of the user
+   //   "Phone": "+919812345123",           // Phone (with the country code)
+   //   "Gender": "M",                     // Can be either M or F
+   //   "DOB": new Date(),                 // Date of Birth. Date object
+   //   // optional fields. controls whether the user will be sent email, push etc.
+   //   "MSG-email": false,                // Disable email notifications
+   //   "MSG-push": true,                  // Enable push notifications
+   //   "MSG-sms": true,                   // Enable sms notifications
+   //   "MSG-whatsapp": true,              // Enable WhatsApp notifications
+   //   }
+   //   })
+      }
+   </script>
+   <script>
+      function pushNotification() {
+          console.log("inside push ")
+         
+    clevertap.notifications.push({
 
+      "titleText":'Would you like to receive Push Notifications?',
+
+      "bodyText":'We promise to only send you relevant content and give you updates on your transactions',
+
+      "okButtonText":'Sign me up!',
+
+      "rejectButtonText":'No thanks !',
+
+      "okButtonColor":'#f28046 ',
+     "okCallback":function () {
+       clevertap.event.push("Permission", {
+      "Action":"Accepted",
+      });
+
+      },
+    "rejectCallback":function () {
+       clevertap.event.push("Permission", {
+      "Action":"Rejected",
+       });
+      },
+       "subscriptionCallback":function () {
+       clevertap.event.push("Permission", {
+      "Action":"HardAccepted",
+      });
+
+      }
+  
+  });
+const myTimeout = setTimeout(myGreeting, 5000);
+
+      }
+
+   </script>
+
+     <script>
+document.onclick= function(event) {
+   // Compensate for IE<9's non-standard event model
+   //
+   if (event===undefined) event= window.event;
+   var target= 'target' in event? event.target : event.srcElement;
+     document.getElementsByClassName("wzrk-alert")[0].remove()
+
+};
+
+   </script>
+   
+   
+   
+   <script>
+      function productView() {
+        document.getElementById("demo").innerHTML = "<b>Product Viewed </b>   ";
+        clevertap.event.push("Product Viewed", {
+      "Product name":"iPhone 12",
+      "Category":"Phone",
+      "Price":759.99,
+      });
+      }
+   </script>
+   <div class="btn">CLOSE</div>
+   <!-- //Firebase  Script -->
+   <script>
+      var btn = document.querySelector('.btn');
+      var wrapper = window.parent.document.getElementById('wizParDiv0');
+      btn.addEventListener('click', closePopUp);
+   //   function closePopUp()
+   //   { wrapper.remove();
+   //   }
+   </script>
+   <!-- <script src="./clevertap_sw.js"></script> -->
+<script type="module">
+ // Import the functions you need from the SDKs you need
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-analytics.js";
+ // TODO: Add SDKs for Firebase products that you want to use
+ // https://firebase.google.com/docs/web/setup#available-libraries
+
+ // Your web app's Firebase configuration
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+ const firebaseConfig = {
+   apiKey: "AIzaSyD4fod_6G9JL1ZnnjaaM2PGZcNyME-sDQ0",
+   authDomain: "test-86509.firebaseapp.com",
+   projectId: "test-86509",
+   storageBucket: "test-86509.appspot.com",
+   messagingSenderId: "618828970358",
+   appId: "1:618828970358:web:fba84ed480f1af3136e257",
+   measurementId: "G-KJHHXRZKKX"
+ };
+
+ // Initialize Firebase
+ const app = initializeApp(firebaseConfig);
+ const analytics = getAnalytics(app);
+</script>
+<!--    <script type="module">-->
+<!--       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";-->
+<!--         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics.js";-->
+<!--         import { } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-messaging.js"-->
+      
+      
+<!--         const firebaseConfig = {-->
+<!--           apiKey: "AIzaSyCK0SUIlYj-6-JwmU9mTlyFSeavj_1BAQk",-->
+<!--           authDomain: "testweb-3a7cf.firebaseapp.com",-->
+<!--           projectId: "testweb-3a7cf",-->
+<!--           storageBucket: "testweb-3a7cf.appspot.com",-->
+<!--           messagingSenderId: "678511678738",-->
+<!--           appId: "1:678511678738:web:0de690b1991619006fcfcb",-->
+<!--           measurementId: "G-8TW6EVM4VL"-->
+<!--         };-->
+      
+       
+<!--         const app = initializeApp(firebaseConfig);-->
+<!--         const analytics = getAnalytics(app);-->
+<!--    </script>-->
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+   <script type="text/javascript">
+      $(function(){
+          $('#button').click(function(){ 
+              if(!$('#iframe').length) {
+                      $('#iframeHolder').html('<iframe id="iframe" src="https://infinitival-floor.000webhostapp.com/screen2.html" width="700" height="450"></iframe>');
+              }
+          });   
+      });
+   </script>
+   <script>function exitintent(){
+      //  clevertap.event.push("AbexitIntent");
+          var CT = clevertap.getCleverTapID();
+          document.getElementById("test").innerHTML = CT;
+          console.log(CT+"ID");
+      }
+   </script>
+   <form>
+      <input type="button" onclick="exitintent()" value="Show CT ID"><br>
+   </form>
+   <h2 id="test"> </h2>
+   <button id="button">SHOW IFRAME</button>
+   
+   <div class="container">
+       <div class="row">
+              <div class="col-sm-6">
+
+      <h3>Modal Example</h3>
+      <p>Click on the button to open the modal.</p>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+      Open modal
+      </button>
+      <br>
+  
+      <button type="button" class="btn btn-danger" onclick="showinbox()">
+      Show Web Inbox
+      </button>
+         </div>
+      
+      </div>
+   </div>
+   <!-- The Modal -->
+   <div class="modal" id="myModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Modal Heading</h4>
+               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <div id="iframeHolder"></div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
      
-      let pushEvent = () => {
-        clevertap.event.push("ProductViewed");
-      };
+   <div class="container">
+       <div class="row">
+              <div class="col-sm-6">
+   <div id="webInbox">
+      <h2>Web Inbox</h2>
+      <p>This is custom rendering of Web Inbox</p>
+      <table class="table">
+         <thead>
+            <tr>
+               <th>Title</th>
+               <th>Description</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td id="titlepop"></td>
+               <td id="descriptionpop"></td>
+            </tr>
+         </tbody>
+      </table>
+      <br>  <br>
+      <br>
+      <br>
+   </div>
+   </div>
+   </div>
+   </div>
+ 
+<style>.footer,.generic-footer{margin-bottom:98px}@media (min-width:374px){.footer,.generic-footer{margin-bottom:78px}}@media (min-width:546px){.footer,.generic-footer{margin-bottom:56px}}@media (min-width:1055px){.footer,.generic-footer{margin-bottom:0}}.disclaimer{position:fixed;z-index:9999999;bottom:0;right:0;border-top:2px solid #ff5c62;text-align:center;font-size:14px;font-weight:400;background-color:#fff;padding:5px 10px 5px 10px}.disclaimer a:hover{text-decoration:underline}@media (min-width:1052px){.disclaimer{text-align:right;border-left:2px solid red;border-top-left-radius:10px}}@media (min-width:1920px){.disclaimer{width:60%}}</style><div class="disclaimer">We support Ukraine and condemn war. Push Russian government to act against war. Be brave, vocal and show your support to Ukraine. Follow the latest news <a title="https://www.bbc.com/news/live/world-europe-60517447" target="_blank" href="https://www.bbc.com/news/live/world-europe-60517447" style="color: black;"><b>HERE</b></a></div>
+ <!--<script>-->
+ <!--      console.log("event not")-->
+ <!--      clevertap.event.push("Event Browser");-->
+ <!--       if (window.CleverTap) {-->
+ <!--           CleverTap.pushEvent("Event Browser"); -->
 
-      let ipfalse = () => {
-        
-        clevertap.privacy.push({ useIP: false }); 
-        clevertap.event.push("useIP: false ");
-   
-        
-      };
-      let iptrue = () => {
-        clevertap.privacy.push({ useIP: true }); 
-        clevertap.event.push("useIP: true ");
+ <!--       }-->
+       
+ <!--  </script>-->
+<!-- <script>
+   window.addEventListener('load', () => {
+     registerSW();
+   });
 
-      };
+   // Register the Service Worker
+   async function registerSW() {
+     if ('clevertap_sw' in navigator) {
+       try {
+         await navigator
+               .serviceWorker
+               .register('clevertap_sw.js');
+       }
+       catch (e) {
+         console.log('SW registration failed');
+       }
+     }
+   }
+</script> -->
 
-      let onuserlogin = () => {
-        clevertap.onUserLogin.push({
-    "Site": {
-      "Name": "div web",
-      "Identity": 73737373,
-      "Email": "73737373@gmail.com",
-      "Gender": "M",
-      "DOB": new Date(),
-      "MSG-email": true,
-      "MSG-push": true,
-      "MSG-sms": true,
-      "MSG-whatsapp": true,
-    },
-  });
-      };
-    </script>
-    <!-- key/value events -->
-    <!-- profile push  -->
-   
-    
-    <script src="/clevertap_sw.js"></script>
-    <!-- send notification event -->
-    <br /><br />
-    
-  
-    <script>
-      let pushnotif = () => {
-        clevertap.notifications.push({
-    titleText: "Would you like to receive Notification?",
-    bodyText: "Will send you only trusted notifactions and updates",
-    okButtonText: "OK",
-    rejectButtonText: "Cancel",
-    okButtonColor: "#F28046",
-  });
-//   navigator.geolocation.getCurrentPosition(function(position) {
-//     let lat = position.coords.latitude;
-//     let long = position.coords.longitude;
-//     console.log(lat,long);
-//     clevertap.event.push(lat);
-//     clevertap.event.push("LOCATION", {
-//   "LAT":lat,
-//   "LONG":long,
-//   "Date": new Date()
-// });
-//   clevertap.profile.push({
-//     "Site": {
-//       "Latitude": lat,
-//       "Longitude": long,
-//     },
-  
-// });
 
-  //});
-      };
-    </script>
-    
-  </body>
+</body>
 </html>
