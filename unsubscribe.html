@@ -18,7 +18,7 @@
 
         <div>   
 
-            <h4>I want to unsubscribe from future emails for clevertap using email
+            <h4>I want to unsubscribe from future emails for clevertap using email for checkbox
 
             </h4>       
 
@@ -119,8 +119,12 @@
 
                             if(groupsToBeShown.includes(obj.name)){
 
-                                checkBox.setAttribute("checked", true);
                                 console.log("flag"+groupsToBeShown.includes(obj.name));
+
+                            }else{
+                               checkBox.setAttribute("checked", true);
+
+                              console.log("flag inside else "+groupsToBeShown.includes(obj.name));
 
                             }
 
