@@ -1,114 +1,232 @@
+
+Suraj.Parwani suraj.parwani@cactuglobal.com
+Wednesday 12:13
+To:CleverTapAnjali Sampratiksha.lotlikar@cactusglobal.comShow more
+Hello All,
+
+Here is the code snippet which we used as POC in HTML.
+
+
 <html>
-<head>
-    <link rel="manifest" href="/manifest.json">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" async="" src="https://d2r1yp2w7bby2u.cloudfront.net/js/a.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!--<script type="text/javascript">-->
-  
-    <title>Clevertap Web SDK</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-     <meta charset="utf-8">
-  <meta name="viewport"
-        content="width=device-width,
-                 initial-scale=1">
-  <meta http-equiv="X-UA-Compatible"
-        content="ie=edge">
- 
-  <!-- Title -->
+
+    <head>
+
+        <meta charset="utf-8" />
+
+        <meta name="viewport" content="initial-scale=0, maximum-scale=1, user-scalable=yes" />
+
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+
+        <title>Unsubscribe</title>
+
+    </head>
+
+    <body>
+
+        <div>   
+
+            <h4>I want to unsubscribe from future emails
+
+            </h4>       
+
+            <input type="text" id="email" />
+
+            <br/><br/>
+
+            <!-- Displaying unsubscribe groups in the below div once loaded -->
+
+            <div id="unsubscribe-groups" style="display: none"></div>
+
+            <!-- Unsubscribe groups buttont. User will click here and it should call `changeSubscriptionGroups`
+
+                method to send the request to CleverTap. -->
+
+            <button onclick="changeSubscriptionGroups()">Unsubscribe</button>   
+
+         </div>
 
  
-  <!-- Meta Tags required for
-       Progressive Web App -->
-  <meta name=
-  "apple-mobile-web-app-status-bar"
-        content="#aa7700">
-  <meta name="theme-color"
-        content="black">
- 
-  <!-- Manifest File link -->
-  <link rel="manifest"
-        href="manifest.json">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
-    
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P5KD2T3');</script>
-<!-- End Google Tag Manager -->
 
+         <script>
 
-<script>
-    $(".toggle-password").click(function () {
-  $(this).toggleClass("fa-eye fa-eye-slash");
+           window.onload = function() {
 
-  var input = $($(this).attr("toggle"));
+                var isReEncode = false //Should be true only if your server is url encoding the URL on unsubscribe landing page    
 
-});
+                var withGroups = true  // Should be true if the unsubscribe groups should be displayed on the landing page.
 
-</script>
-</head>
-<body>
-       <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5KD2T3"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    
-    
-    <div>
-        <h4>I want to unsubscribe from future emails</h4>
-        <input type="text" id="email"  />
-        <br/><br/>
-        <button onclick="unsubscribe()">Unsubscribe me</button><br/><br/>
-        <!--<button onclick="resubscribe()">Resubscribe</button>-->
-    </div>
+                $WZRK_WR.getEmail(false, withGroups);
 
+            };
 
+            // will be called after the email id of the user has been fetched
 
-    <script>
-        // on  page load, fetch the email id of the user.
-        window.onload = function() {
-            
-            $WZRK_WR.getEmail();
-            console.log("email is"+$WZRK_WR.getEmail())
-        };
+            function wzrk_email_fetched(emailStr, profile) {
 
-        // will be called after the email id of the user has been fetched
-        function wzrk_email_fetched(emailStr) {
-            document.getElementById("email").value = emailStr;
-             console.log("email is"+emailStr);
-        }
+                document.getElementById("email").value = emailStr;
 
-        // will be called after the subscription preferences for the user have been updated
-        function wzrk_email_subscription(status) {
-            //status 0 : unsubscribed, status 1 : subscribed
-            // todo - you can show a success message to the user from here
-            var statusLabel = 'subscribed';
-            if (status == 0) {
-                statusLabel = 'unsubscribed';
+                if(!profile || !profile.groups || profile.groups.length === 0) {
+
+                    console.log("did not recv groups in callback");
+
+                }
+
+                var subscriptionGroups = profile.groups; // will be recvd only if withGroups passed true above
+
+                $WZRK_WR.setSubscriptionGroups(subscriptionGroups); // Can also be set here and can be retrieved by calling `$WZRK_WR.getSubscriptionGroups` method
+
+                 $WZRK_WR.setUpdatedCategoryLong(profile);
+
+                displayGroups()
+
             }
-            alert("You've been " + statusLabel);
 
-        }
+              function displayGroups() {
 
-        // call this function to unsubscribe the user
-        function unsubscribe() {
-            $WZRK_WR.unSubEmail();
+                //   Fetching groups
 
-        }
+                  var subscriptionGroups = $WZRK_WR.getSubscriptionGroups();
 
-        // call this function to resubscribe the user
-        function resubscribe() {
-            $WZRK_WR.subEmail();
-        }
-    </script>
-    
-    
-</body>    
-    
+                //  Rendering groups in above html div
+
+                  var groupsToBeShown = ["Editage Subscribers"];
+
+                  var addList = document.getElementById('unsubscribe-groups');
+
+                        addList.style.display = 'block';
+
+                        for(var i = 0; i < subscriptionGroups.length; i++) {
+
+                            var obj = subscriptionGroups[i];
+
+                            var checkBox = document.createElement("INPUT");
+
+                            var isUnsubscribed = obj.isUnsubscribed
+
+                            checkBox.setAttribute("type", "checkbox");
+
+                            if(isUnsubscribed){
+
+                                checkBox.setAttribute("checked", true);
+
+                            }
+
+                            checkBox.setAttribute("name", obj.name)
+
+                            checkBox.setAttribute("id", obj.name)
+
+                            checkBox.setAttribute("class", "ct-unsub-group-input-item");
+
+                            var label = document.createElement("LABEL");
+
+                            label.setAttribute("for", obj.name)
+
+                            label.innerHTML = "Unsubscribe from " + obj.name
+
+                            label.style.display = 'none';
+
+                            checkBox.style.display = 'none';
+
+                            if(groupsToBeShown.includes(obj.name)){
+
+                                checkBox.setAttribute("checked", true);
+
+                            }
+
+                            addList.appendChild(label);
+
+                            addList.appendChild(checkBox);
+
+                        }
+
+              }
+
+            // This function is used to send groups updation request. User can directly call
+
+            // `$WZRK_WR.changeSubscriptionGroups(isReencode, updatedGroups)` by passing updated groups in format specified.
+
+               function changeSubscriptionGroups(){
+
+                let unsubcribeGroups = [];
+
+                    var elements = document.getElementsByClassName(
+
+                        "ct-unsub-group-input-item");
+
+                    for (var i = 0; i < elements.length; i++) {
+
+                        var element = elements[i];
+
+                        if(element.name) {
+
+                            var data = {name: element.name, isUnsubscribed: element.checked}
+
+                            unsubcribeGroups.push(data)
+
+                        }
+
+                    }
+
+                    $WZRK_WR.changeSubscriptionGroups(false, unsubcribeGroups);
+
+                 }
+
+                // will be called after the subscription preferences for the user have been updated
+
+                function wzrk_email_subscription(status) {
+
+                    var message = 'You are now unsubscribed.';
+
+                    alert(message);
+
+                    //status 0 : unsubscribed, status 1 : subscribed
+
+                    // todo - you can show a success message to the user from here
+
+                    /*var statusLabel = 'subscribed';
+
+                    if (status == 0) {
+
+                        statusLabel = 'unsubscribed';
+
+                    }
+
+                    alert("You've been " + statusLabel);*/
+
+                }
+
+        </script>
+
+ 
+
+        <script type="text/javascript">
+
+            var clevertap = { event: [], profile: [], account: [], onUserLogin: [], notifications: [] };
+
+            // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+
+            clevertap.account.push({ id: 'TEST-654-Z9R-646Z' });
+
+            (function () {
+
+                var wzrk = document.createElement("script");
+
+                wzrk.type = "text/javascript";
+
+                wzrk.async = true;
+
+                wzrk.src = ("https:" == document.location.protocol ? "https://d2r1yp2w7bby2u.cloudfront.net" : "http://static.clevertap.com") + "/js/a.js";
+
+                var s = document.getElementsByTagName("script")[0];
+
+                s.parentNode.insertBefore(wzrk, s);
+
+            })();
+
+        </script>
+
+    </body>
+
 </html>
+
+ 
