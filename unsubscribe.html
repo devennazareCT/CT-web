@@ -1,11 +1,4 @@
 
-Suraj.Parwani suraj.parwani@cactuglobal.com
-Wednesday 12:13
-To:CleverTapAnjali Sampratiksha.lotlikar@cactusglobal.comShow more
-Hello All,
-
-Here is the code snippet which we used as POC in HTML.
-
 
 <html>
 
@@ -25,7 +18,7 @@ Here is the code snippet which we used as POC in HTML.
 
         <div>   
 
-            <h4>I want to unsubscribe from future emails
+            <h4>I want to unsubscribe from future emails for clevertap
 
             </h4>       
 
@@ -123,13 +116,15 @@ Here is the code snippet which we used as POC in HTML.
 
                             label.innerHTML = "Unsubscribe from " + obj.name
 
-                            label.style.display = 'none';
+//                             label.style.display = '
+                            ';
 
-                            checkBox.style.display = 'none';
+//                             checkBox.style.display = 'none';
 
                             if(groupsToBeShown.includes(obj.name)){
 
                                 checkBox.setAttribute("checked", true);
+                                console.log("flag"+groupsToBeShown.includes(obj.name));
 
                             }
 
