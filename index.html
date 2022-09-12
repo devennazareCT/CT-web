@@ -189,7 +189,10 @@ shareButton.addEventListener('click', () => {
    var mobileView = $(window).width() < 786;
 
    console.log("mobvieww is"+mobileView);
-       
+               if (window.CleverTap) {
+              CleverTap.pushEvent("DevenWebView"); 
+
+               }
    if(mobileView){
        console.log("welcome")
        
